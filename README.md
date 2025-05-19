@@ -78,7 +78,7 @@ Um sistema de alerta de enchente utilizando o Raspberry Pi Pico W na plaquinha B
 
 ## 🎥 Demonstração: 
 
-- Para ver o funcionamento do projeto, acesse o vídeo de demonstração gravado por José Vinicius em:
+- Para ver o funcionamento do projeto, acesse o vídeo de demonstração gravado por José Vinicius em: https://youtu.be/qyIR7HiaAmI
 
 ## 💻 Desenvolvedor
  
