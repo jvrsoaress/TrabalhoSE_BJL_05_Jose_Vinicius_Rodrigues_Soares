@@ -141,14 +141,15 @@ void vTaskDisplay(void *params) {
             // determina o valor a ser exibido com base no modo atual
             uint16_t valor = (modo_atual == NIVEL_AGUA) ? data.y_pos : data.x_pos;
             const char* titulo = (modo_atual == NIVEL_AGUA) ? "Nivel Agua" : "Volume Chuva";
-            sprintf(valor_str, "Valor: %u", valor); // formata o valor para exibição
+            uint8_t percentual = (valor * 100) / 4095;     // converte o valor de 0-4095 para porcentagem
+            sprintf(valor_str, "Valor: %u%%", percentual); // formata o valor como porcentagem
 
-            // exibe o título centralizado na linha 8
+            // título centralizado 
             ssd1306_draw_string(&disp, titulo, (WIDTH - strlen(titulo) * 8) / 2, 8);
-            // exibe o valor na linha 24
+            // exibe o valor 
             ssd1306_draw_string(&disp, valor_str, (WIDTH - strlen(valor_str) * 8) / 2, 24);
 
-            // determina e exibe o estado de alerta na linha 40
+            // determina e exibe o estado de alerta 
             if (modo_atual == NIVEL_AGUA) {
                 if (valor <= 2457) { // 0 a 60%
                     ssd1306_draw_string(&disp, "Seguro", (WIDTH - 6 * 8) / 2, 40);
