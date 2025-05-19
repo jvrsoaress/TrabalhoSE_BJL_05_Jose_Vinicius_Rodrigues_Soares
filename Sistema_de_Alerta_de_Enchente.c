@@ -76,7 +76,7 @@ void set_matriz_nivel(uint16_t valor, EstadoAlerta estado) {
     int linhas_acesas = (valor * 5) / 4095; // escala o valor de 0 a 4095 para 0 a 4
     for (int i = 4; i >= (4 - linhas_acesas); i--) { // preenche de baixo para cima
         for (int j = 0; j < 5; j++) {
-            pixels[pixel_map[i][j]] = urgb_u32(0, 0, 32); // cor azul para representar água/chuva
+            pixels[pixel_map[i][j]] = urgb_u32(0, 0, 8); // cor azul para representar água/chuva
         }
     }
 
@@ -247,12 +247,12 @@ void vTaskBuzzer(void *params) {
             if (estado == SEGURO) { // seguro: sem som (Modo Normal)
                 pwm_set_gpio_level(BUZZER, 0); // desliga o buzzer
             } else if (estado == ALERTA) { // alerta: beeps intermitentes (200ms ligado, 800ms desligado)
-                pwm_set_gpio_level(BUZZER, 2048); // 50% duty cycle para som mais alto
+                pwm_set_gpio_level(BUZZER, 256); // % duty cycle 
                 vTaskDelay(pdMS_TO_TICKS(200)); // mantém ligado por 200ms
                 pwm_set_gpio_level(BUZZER, 0); // desliga o buzzer
                 vTaskDelay(pdMS_TO_TICKS(800)); // mantém desligado por 800ms
             } else { // emergência: som contínuo
-                pwm_set_gpio_level(BUZZER, 2048); // 50% duty cycle para som mais alto, mantido ligado
+                pwm_set_gpio_level(BUZZER, 256); // % duty cycle
             }
         }
     }
